@@ -26,4 +26,17 @@ object session {
   sqrt(0.1e-20)                                   //> res6: Double = 3.1633394544890125E-11
   sqrt(1.0e20)                                    //> res7: Double = 1.0000021484861237E10
   sqrt(1.0e50)                                    //> res8: Double = 1.0000003807575104E25
+
+  def gcd(a: Int, b: Int): Int =
+    if (b == 0) a else gcd(b, a % b)              //> gcd: (a: Int, b: Int)Int
+    
+  gcd(14, 21)                                     //> res9: Int = 7
+
+	def factorial(n: Int): Int = {
+		def loop(acc: Int, n: Int): Int =
+			if (n == 0) acc else loop(acc * n, n - 1)
+		loop(1, n)
+	}                                         //> factorial: (n: Int)Int
+	
+	factorial(4)                              //> res10: Int = 24
 }
