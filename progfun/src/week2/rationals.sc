@@ -11,11 +11,25 @@ object rationals {
   val z = new Rational(3, 2)                      //> z  : week2.Rational = 3/2
   
   x.sub(y).sub(z)                                 //> res3: week2.Rational = -79/42
+  y.add(y)                                        //> res4: week2.Rational = 10/7
+  x.less(y)                                       //> res5: Boolean = true
+  x.max(y)                                        //> res6: week2.Rational = 5/7
+  new Rational(2)                                 //> res7: week2.Rational = 2/1
 }
 
 class Rational(x: Int, y: Int) {
-  def numer = x
-  def denom = y
+	require(y != 0, "denominator mus be non-zero")
+	
+	def this(x: Int) = this(x, 1)
+	
+	private def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+	private val g = gcd(x, y)
+  val numer = x / g
+  val denom = y / g
+  
+  def less(that: Rational) = numer * that.denom < that.numer * denom
+  
+  def max(that: Rational) = if (less(that)) that else this
 
   def add(that: Rational) =
     new Rational(
